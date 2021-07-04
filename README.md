@@ -1,6 +1,10 @@
 # rest-api-django
 Repo for Udemy course "Build Backend Rest Api with Django and Python"
 
+[How to override user model in django](https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#auth-custom-user)
+
+[Linux Commmand Guid](http://www.keyxl.com/aaaf192/83/Linux-Bash-Shell-keyboard-shortcuts.htm)
+
 ----------------------------------------------------
 ## Table of contents
 - [ ] Need to add Table of contents here
@@ -45,6 +49,11 @@ to do this go to git installation and right click on git.exe, bash.exe and under
 ``vagrant destroy --force``
 
 ### Vagrant Issues
+#### Default Superuser Password : ``vagrant``
+#### Not aware of root password
+```shell script
+sudo passwd root
+```
 #### Public or private ssh key issue
 * create ssh key using ``ssh-keygen`` inside of your host machine
 
@@ -71,4 +80,32 @@ cd ~
 mkdir virutal_envs
 virtualenv virutal_envs/project_name_venv  
 ```
+### Environment Issues
+#### Django server not able to listen to host 
+* Use curl command in `vagrant ssh` to test the output
+```shell script
+curl -I http://127.0.0.1:8000/
+```
+if you get the response in both curl command and manage.py log
+that means everything is correct from django side and guest vm side
+* Change the runserver command to let any host ip connect
+```shell script
+python manage.py runserver [::]:8080
+```
 
+#### Postgres 
+###### Not able to create database or anything
+```postgresql
+/* List all tables in database*/
+\l 
+/* Find all users database*/
+\du 
+```
+Login using user with role of superuser, from above \du command 
+```shell script
+sudo su - postgres
+```
+Change permission of user to allow DML or DDL on database
+```postgresql
+ALTER USER myuser WITH SUPERUSER;
+```

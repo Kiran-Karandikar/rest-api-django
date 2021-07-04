@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
       config.vbguest.no_remote   = true
   end
   # To forward ports
-  config.vm.network "forwarded_port", guest: 8000, host: 8000
+  # config.vm.network "forwarded_port", guest: 8000, host: 8000
 
   # For OSX/LINUX
   # config.vm.network "private_network", ip: "10.10.10.10"
@@ -26,4 +26,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder ".", "/home/vagrant/site"
   config.vm.provision "shell", path: "vagrant_setup.sh"
+
+  # For root login
+  # Not safe if accessing publicly
+  # config.ssh.username = 'root'
+  # config.ssh.password = 'vagrant'
+  # config.ssh.insert_key = 'true'
 end

@@ -5,6 +5,7 @@ Repo for Udemy course "Build Backend Rest Api with Django and Python"
 
 [Linux Commmand Guid](http://www.keyxl.com/aaaf192/83/Linux-Bash-Shell-keyboard-shortcuts.htm)
 
+[How to use plural name for django class](https://docs.djangoproject.com/en/2.2/ref/models/options/#verbose-name)
 ----------------------------------------------------
 ## Table of contents
 - [ ] Need to add Table of contents here

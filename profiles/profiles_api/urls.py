@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 
-from .views import home_page
+from .views import HelloApiView, home_page
 
-urlpatterns = [path("", home_page, name = "home_page")]
+urlpatterns = [path("", home_page, name = "home_page"),
+               path("test-api", HelloApiView.as_view(), name = "test_api")]

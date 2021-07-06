@@ -6,6 +6,7 @@ Repo for Udemy course "Build Backend Rest Api with Django and Python"
 [Linux Commmand Guid](http://www.keyxl.com/aaaf192/83/Linux-Bash-Shell-keyboard-shortcuts.htm)
 
 [How to use plural name for django class](https://docs.djangoproject.com/en/2.2/ref/models/options/#verbose-name)
+
 ----------------------------------------------------
 ## Table of contents
 - [ ] Need to add Table of contents here
@@ -95,18 +96,34 @@ python manage.py runserver [::]:8080
 ```
 
 #### Postgres 
-###### Not able to create database or anything
+> ##### Not able to create a database or anything
 ```postgresql
 /* List all tables in database*/
 \l 
 /* Find all users database*/
 \du 
 ```
-Login using user with role of superuser, from above \du command 
+* Login using user with role of superuser, from above \du command 
 ```shell script
 sudo su - postgres
 ```
-Change permission of user to allow DML or DDL on database
+* Change permission of user to allow DML or DDL on database
 ```postgresql
 ALTER USER myuser WITH SUPERUSER;
+```
+* Change the password of user `postgres`
+```postgresql
+ALTER USER postgres WITH PASSWORD 'vagrant';
+```
+> ##### Not able to connect to postgres using django settings file.
+```shell script
+sudo vim /etc/postgresql/9.5/main/postgresql.conf
+# Find listen_addresses and change it to
+echo "listen_addresses = '*'"
+sudo vim /etc/postgresql/9.1/main/pg_hba.conf
+# Update host IPv4 & 6 line to reads
+host  all  all 0.0.0.0/0 md5
+# reconfigure authentication method by changing all peer to md5
+# At last 
+sudo service postgresql restart
 ```

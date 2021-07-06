@@ -70,11 +70,11 @@ WSGI_APPLICATION = 'profiles.wsgi.application'
 # Connect to remote postgres server
 DATABASES = {
         'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME'  : os.path.join(BASE_DIR, 'db.sqlite3'),
-                # 'ENGINE'  : 'django.db.backends.postgresql',
-                # "NAME"    : "profiles_api", "USER": "postgres",
-                # "PASSWORD": "vagrant", "HOST": "[::]", "PORT": "8080"
+                # 'ENGINE': 'django.db.backends.sqlite3',
+                # 'NAME'  : os.path.join(BASE_DIR, 'db.sqlite3'),
+                'ENGINE'  : 'django.db.backends.postgresql',
+                "NAME"    : "profiles_api", "USER": "vagrant",
+                "PASSWORD": "vagrant", "HOST": "localhost", "PORT": "5432",
         }
 }
 

@@ -1,26 +1,23 @@
-# rest-api-django
-Repo for Udemy course "Build Backend Rest Api with Django and Python"
-
-[How to override user model in django](https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#auth-custom-user)
-
-[Linux Commmand Guid](http://www.keyxl.com/aaaf192/83/Linux-Bash-Shell-keyboard-shortcuts.htm)
-
-[How to use plural name for django class](https://docs.djangoproject.com/en/2.2/ref/models/options/#verbose-name)
-
-----------------------------------------------------
 ## Table of contents
-- [ ] Need to add Table of contents here
+* [Vagrant Setup](#system-dependencies)
+    * [Usage](#usage)
+* [Vagrant Issues](#vagrant-issues)
+* [Django Environment Issues](#environment-issues)
+* [Postgres Issues](#postgres-issues)
+
+# Backend Rest api with django, postgres, vagrant
+Repo for Udemy course "Build Backend Rest Api with Django and Python"
 
 ### Project Cheat Sheet
 - [ ] Add Link to resource Page here
+#### Django Resource Links
+* [How to override user model in django](https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#auth-custom-user)
+
+* [Linux Commmand Guid](http://www.keyxl.com/aaaf192/83/Linux-Bash-Shell-keyboard-shortcuts.htm)
+
+* [How to use plural name for django class](https://docs.djangoproject.com/en/2.2/ref/models/options/#verbose-name)
 
 - [ ] Fix the vagrant.sh setup file to reflect the venv changes
-----------------------------------------------------
-* Environment Setup
-```shell script
-pip install --user pipenv
-pipenv install -r requirements.txt
-```
 
 ### System Dependencies
 
@@ -44,7 +41,7 @@ to do this go to git installation and right click on git.exe, bash.exe and under
 
 ##### Subsequent Runs
 
-* `vagrant up`
+1. `vagrant up`
 2. `vagrant ssh`
 
 ##### Destory VM
@@ -83,6 +80,11 @@ mkdir virutal_envs
 virtualenv virutal_envs/project_name_venv  
 ```
 ### Environment Issues
+* Environment Setup
+```shell script
+pip install --user pipenv
+pipenv install -r requirements.txt
+```
 #### Django server not able to listen to host 
 * Use curl command in `vagrant ssh` to test the output
 ```shell script
@@ -95,7 +97,7 @@ that means everything is correct from django side and guest vm side
 python manage.py runserver [::]:8080
 ```
 
-#### Postgres 
+#### Postgres Issues
 > ##### Not able to create a database or anything
 ```postgresql
 /* List all tables in database*/
@@ -121,9 +123,18 @@ sudo vim /etc/postgresql/9.5/main/postgresql.conf
 # Find listen_addresses and change it to
 echo "listen_addresses = '*'"
 sudo vim /etc/postgresql/9.1/main/pg_hba.conf
-# Update host IPv4 & 6 line to reads
-host  all  all 0.0.0.0/0 md5
-# reconfigure authentication method by changing all peer to md5
+# Update host IPv4 to reads
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+host    all             all             192.168.33.10/24        md5
+host    all             all             0.0.0.0/0               md5
 # At last 
 sudo service postgresql restart
 ```
+> ##### settings for pgadmin4
+###### Pgadmin4 General
+![Pgadmin4 General](Resources/pgadmin4-connection-1.png)
+###### Pgadmin4 Connection
+![Pgadmin4 Connection](Resources/pgadmin4-connection-2.png)
+###### Pgadmin4 SSH Tunnel
+![Pgadmin4 SSH Tunnel](Resources/pgadmin4-connection-3.png)

@@ -1,4 +1,4 @@
-## Table of contents
+# Table of contents
 * [Vagrant Setup](#system-dependencies)
     * [Usage](#usage)
 * [Vagrant Issues](#vagrant-issues)
@@ -8,9 +8,9 @@
 # Backend Rest api with django, postgres, vagrant
 Repo for Udemy course "Build Backend Rest Api with Django and Python"
 
-### Project Cheat Sheet
+## Project Cheat Sheet
 - [ ] Add Link to resource Page here
-#### Django Resource Links
+## Django Resource Links
 * [How to override user model in django](https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#auth-custom-user)
 
 * [Linux Commmand Guid](http://www.keyxl.com/aaaf192/83/Linux-Bash-Shell-keyboard-shortcuts.htm)
@@ -33,30 +33,26 @@ Repo for Udemy course "Build Backend Rest Api with Django and Python"
 to do this go to git installation and right click on git.exe, bash.exe and under compatibility click on run as administrator
 > * Do same for git-bash.exe and git-cmd.exe
 ### Usage
-
-##### First Run
+#### First Run
 
 1. `vagrant up` _to start the VM and run initial provisioning_
 3. `vagrant reload` _to restart following the updates installed during provisioning_
 
-##### Subsequent Runs
-
+#### Subsequent Runs
 1. `vagrant up`
 2. `vagrant ssh`
-
 ##### Destory VM
 ``vagrant destroy --force``
-
-### Vagrant Issues
+### *Vagrant Issues*
 #### Default Superuser Password : ``vagrant``
 #### Not aware of root password
 ```shell script
 sudo passwd root
 ```
-#### Public or private ssh key issue
+#### _Public or private ssh key issue_
 * create ssh key using ``ssh-keygen`` inside of your host machine
 
-#### Any PIP related issues 
+#### _Any PIP related issues_
  
 ```shell script
 sudo apt-get remove --purge python-pip
@@ -79,8 +75,8 @@ cd ~
 mkdir virutal_envs
 virtualenv virutal_envs/project_name_venv  
 ```
-### Environment Issues
-* Environment Setup
+### Django Environment Issues
+* On first run, install following packages
 ```shell script
 pip install --user pipenv
 pipenv install -r requirements.txt
@@ -96,9 +92,8 @@ that means everything is correct from django side and guest vm side
 ```shell script
 python manage.py runserver [::]:8080
 ```
-
-#### Postgres Issues
-> ##### Not able to create a database or anything
+### Postgres Issues
+> #### Not able to create a database or anything
 ```postgresql
 /* List all tables in database*/
 \l 
@@ -117,7 +112,7 @@ ALTER USER myuser WITH SUPERUSER;
 ```postgresql
 ALTER USER postgres WITH PASSWORD 'vagrant';
 ```
-> ##### Not able to connect to postgres using django settings file.
+> #### Not able to connect to postgres using django settings file.
 ```shell script
 sudo vim /etc/postgresql/9.5/main/postgresql.conf
 # Find listen_addresses and change it to
@@ -131,10 +126,10 @@ host    all             all             0.0.0.0/0               md5
 # At last 
 sudo service postgresql restart
 ```
-> ##### settings for pgadmin4
-###### Pgadmin4 General
+> #### settings for pgadmin4
+##### Pgadmin4 General
 ![Pgadmin4 General](Resources/pgadmin4-connection-1.png)
-###### Pgadmin4 Connection
+##### Pgadmin4 Connection
 ![Pgadmin4 Connection](Resources/pgadmin4-connection-2.png)
-###### Pgadmin4 SSH Tunnel
+##### Pgadmin4 SSH Tunnel
 ![Pgadmin4 SSH Tunnel](Resources/pgadmin4-connection-3.png)

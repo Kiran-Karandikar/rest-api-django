@@ -48,6 +48,53 @@ class HelloApiView(APIView):
         else:
             return Response(szs.errors, status = HTTP_400_BAD_REQUEST)
 
+    def put(self, request, pk = None):
+        """
+        Method to handle put request.
+        Args:
+            request:
+            pk:
+
+        Returns:
+
+        """
+        response_dict = {
+                "message": "Details: ".format(self.__doc__)
+        }
+        return Response(response_dict, status = HTTP_200_OK)
+
+    def patch(self, request, pk = None):
+        """
+        This method will update some details to object rather than the whole
+        object
+        .
+        Args:
+            request:
+            pk:
+
+        Returns:
+
+        """
+        response_dict = {
+                "message": "Details: ".format(self.__doc__)
+        }
+        return Response(response_dict, status = HTTP_200_OK)
+
+    def delete(self, request, pk = None):
+        """
+        Method to delete the object based on a primary key `pk`.
+        Args:
+            request:
+            pk:
+
+        Returns:
+
+        """
+        response_dict = {
+                "message": "Details: ".format(self.__doc__)
+        }
+        return Response(response_dict, status = HTTP_200_OK)
+
 
 # Create your views here.
 def home_page(request):

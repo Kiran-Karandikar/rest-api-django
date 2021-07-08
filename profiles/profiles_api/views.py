@@ -2,9 +2,10 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
-from rest_framework.viewsets import ViewSet
+from rest_framework.viewsets import ModelViewSet, ViewSet
 
-from .serializers import HelloSerailzer
+from .models import UserProfile
+from .serializers import HelloSerailzer, UserProfilerSerializer
 
 
 class HelloViewSet(ViewSet):
@@ -195,6 +196,25 @@ class HelloApiView(APIView):
                 "message": "Details: ".format(self.__doc__)
         }
         return Response(response_dict, status = HTTP_200_OK)
+
+
+class UserProfileViewSet(ModelViewSet):
+    """
+    Class to handle user profiles.
+    """
+    serializer_class = UserProfilerSerializer
+    queryset = UserProfile.objects.all()
+
+    def list(self, request):
+        """
+
+        Args:
+            request:
+
+        Returns:
+
+        """
+        pass
 
 
 # Create your views here.

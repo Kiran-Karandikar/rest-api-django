@@ -1,7 +1,9 @@
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.filters import SearchFilter
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import (
+    IsAuthenticated,
+)
 from rest_framework.response import Response
 from rest_framework.settings import api_settings
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
@@ -231,15 +233,22 @@ class UserFeedViewSet(ModelViewSet):
     serializer_class = UserFeedSerializer
     authentication_classes = (TokenAuthentication,)
     queryset = UserFeedItem.objects.all()
-    permission_classes = (IsAuthenticatedOrReadOnly, UserFeedPermission)
+    # feature
+    # to make feed public and available to all users
+    # permission_classes = (IsAuthenticatedOrReadOnly, UserFeedPermission)
 
-    def perform_create(self, serializer):
-        """
-        Handle the create operation of user feed item.
-        Args:
-            serializer: 
+    # feature
+    # to make feed private and available to authenticated user only.
+    permission_classes = (IsAuthenticated, UserFeedPermission)
 
-        Returns:
 
-        """
-        serializer.save(user_profile = self.request.user)
+def perform_create(self, serializer):
+    """
+    Handle the create operation of user feed item.
+    Args:
+        serializer:
+
+    Returns:
+
+    """
+    serializer.save(user_profile = self.request.user)

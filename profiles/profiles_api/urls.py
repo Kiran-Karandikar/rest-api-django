@@ -16,12 +16,11 @@ Including another URLconf
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from .views import HelloApiView, HelloViewSet, UserProfileViewSet, home_page
+from .views import HelloApiView, HelloViewSet, UserProfileViewSet
 
 router = DefaultRouter()
 router.register("HelloViewSet", HelloViewSet, "test")
 router.register("profile", UserProfileViewSet)
 
-urlpatterns = [path("", home_page, name = "home_page"),
-               path("api-view", HelloApiView.as_view(), name = "test_api"),
-               path("view-set", include(router.urls))]
+urlpatterns = [path("api-view", HelloApiView.as_view(), name = "test_api"),
+               path("view-set/", include(router.urls))]

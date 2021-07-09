@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
@@ -204,16 +203,3 @@ class UserProfileViewSet(ModelViewSet):
     """
     serializer_class = UserProfilerSerializer
     queryset = UserProfile.objects.all()
-
-
-# Create your views here.
-def home_page(request):
-    """
-
-    Args:
-        request:
-
-    Returns:
-
-    """
-    return render(request, "test.html")

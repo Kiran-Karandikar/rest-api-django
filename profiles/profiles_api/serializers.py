@@ -36,7 +36,7 @@ class UserProfilerSerializer(szs.ModelSerializer):
         Meta Class.
         """
         model = UserProfile
-        fields = ("id", "names", "email", "password")
+        fields = ("id", "name", "email", "password")
         extra_kwargs = {
                 "password": {
                         "write_only": True, "style": {

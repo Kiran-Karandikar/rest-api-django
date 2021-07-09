@@ -91,5 +91,5 @@ class UserFeedSerializer(szs.ModelSerializer):
         model = UserFeedItem
         fields = ("id", "user_profile", "status_text", "created_on")
         extra_kwargs = {
-                "user_profile": { "read-only": True }
+                "user_profile": { "read_only": True }
         }

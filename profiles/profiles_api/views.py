@@ -1,9 +1,11 @@
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, ViewSet
 
 from .models import UserProfile
+from .permissions import UserProfilePermission
 from .serializers import HelloSerailzer, UserProfilerSerializer
 
 
@@ -203,3 +205,5 @@ class UserProfileViewSet(ModelViewSet):
     """
     serializer_class = UserProfilerSerializer
     queryset = UserProfile.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (UserProfilePermission,)

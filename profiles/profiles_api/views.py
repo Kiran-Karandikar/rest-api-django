@@ -7,9 +7,11 @@ from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, ViewSet
 
-from .models import UserProfile
+from .models import UserFeedItem, UserProfile
 from .permissions import UserProfilePermission
-from .serializers import HelloSerailzer, UserProfilerSerializer
+from .serializers import (
+    HelloSerailzer, UserFeedSerializer, UserProfilerSerializer,
+)
 
 
 class HelloViewSet(ViewSet):
@@ -219,3 +221,23 @@ class UserLoginApiView(ObtainAuthToken):
     Api view to handle user authentication token request.
     """
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+
+
+class UserFeedViewSet(ModelViewSet):
+    """
+    View set to handle the user feed items.
+    """
+    serializer_class = UserFeedSerializer
+    authentication_classes = (TokenAuthentication,)
+    queryset = UserFeedItem.objects.all()
+
+    def perform_create(self, serializer):
+        """
+        Handle the create operation of user feed item.
+        Args:
+            serializer: 
+
+        Returns:
+
+        """
+        serializer.save(user_profile = self.request.user)

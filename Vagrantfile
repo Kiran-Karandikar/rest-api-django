@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.hostname = "django-profiles"
-  config.vm.boot_timeout = 500
+  config.vm.boot_timeout = 700
 
   config.vm.provider :virtualbox do |p|
         p.customize ["modifyvm", :id, "--memory", 2048]

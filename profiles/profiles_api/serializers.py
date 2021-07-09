@@ -5,7 +5,7 @@
 # Python modules
 from rest_framework import serializers as szs
 
-from .models import UserProfile
+from .models import UserFeedItem, UserProfile
 
 
 # 3rd party Modules
@@ -80,3 +80,16 @@ class UserProfilerSerializer(szs.ModelSerializer):
 
         return super(UserProfilerSerializer, self).update(instance,
             validated_data)
+
+
+class UserFeedSerializer(szs.ModelSerializer):
+    """
+    Serializer class to serialize user profile model.
+    """
+
+    class Meta:
+        model = UserFeedItem
+        fields = ("id", "user_profile", "status_text", "created_on")
+        extra_kwargs = {
+                "user_profile": { "read-only": True }
+        }

@@ -36,3 +36,25 @@ class UserProfilePermission(BasePermission):
         if request.method in SAFE_METHODS:
             return True
         return obj.id == request.user.id
+
+
+class UserFeedPermission(BasePermission):
+    """
+    Permission to class to check if user is trying to update their own
+    status.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        """
+        Check if user is authenticate and allowed to update the status.
+        Args:
+            request:
+            view:
+            obj:
+
+        Returns:
+
+        """
+        if request.method in SAFE_METHODS:
+            return True
+        return obj.user_profile.id == request.user.id

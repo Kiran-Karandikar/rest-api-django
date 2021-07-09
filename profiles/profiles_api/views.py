@@ -205,17 +205,6 @@ class UserProfileViewSet(ModelViewSet):
     serializer_class = UserProfilerSerializer
     queryset = UserProfile.objects.all()
 
-    def list(self, request):
-        """
-
-        Args:
-            request:
-
-        Returns:
-
-        """
-        pass
-
 
 # Create your views here.
 def home_page(request):

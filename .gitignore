@@ -127,3 +127,18 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.idea
+
+### Vagrant ###
+# General
+.vagrant/
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.log
+
+### Vagrant Patch ###
+*.box
+
+ubuntu-xenial-16.04-cloudimg-console.log
+rest-api-django-test
+rest-api-django-test.pub

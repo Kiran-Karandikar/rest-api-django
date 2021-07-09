@@ -10,6 +10,7 @@ Repo for Udemy course "Build Backend Rest Api with Django and Python"
 
 ## Project Cheat Sheet
 - [ ] Add Link to resource Page here
+
 ## Django Resource Links
 * [How to override user model in django](https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#auth-custom-user)
 
@@ -17,7 +18,7 @@ Repo for Udemy course "Build Backend Rest Api with Django and Python"
 
 * [How to use plural name for django class](https://docs.djangoproject.com/en/2.2/ref/models/options/#verbose-name)
 
-- [ ] Fix the vagrant.sh setup file to reflect the venv changes
+* [Rest-framework permission](https://www.django-rest-framework.org/api-guide/permissions/)
 
 ### System Dependencies
 

@@ -1,0 +1,254 @@
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.filters import SearchFilter
+from rest_framework.permissions import (
+    IsAuthenticated,
+)
+from rest_framework.response import Response
+from rest_framework.settings import api_settings
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet, ViewSet
+
+from .models import UserFeedItem, UserProfile
+from .permissions import UserFeedPermission, UserProfilePermission
+from .serializers import (
+    HelloSerailzer, UserFeedSerializer, UserProfilerSerializer,
+)
+
+
+class HelloViewSet(ViewSet):
+    """
+    Class to implement rest_framework's view sets.
+    """
+    serializer_class = HelloSerailzer
+
+    def list(self, request):
+        """
+        Method to list all objects of these classes.
+        Args:
+            request:
+
+        Returns:
+
+        """
+        response_dict = {
+                "message" : "This is list method of view set",
+                "test_api": "This is the operations supported, list, create, "
+                            "update, retrieve, partial_update "
+        }
+        return Response(response_dict, HTTP_200_OK)
+
+    def create(self, request):
+        """
+        Method to create the object.
+        Args:
+            request:
+
+        Returns:
+
+        """
+        response_dict = { }
+        szs = self.serializer_class(data = request.data)
+        if szs.is_valid():
+            name = szs.validated_data.get("name")
+            response_dict["message"] = "Hey Hi {}".format(name)
+            return Response(response_dict, HTTP_200_OK)
+        return Response(szs.errors, HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk = None):
+        """
+        Method to update the object by `pk`.
+        Args:
+            request:
+            pk:
+
+        Returns:
+
+        """
+        response_dict = {
+                "Message": "This maps to HTTP put request"
+        }
+        return Response(response_dict, HTTP_200_OK)
+
+    def retrieve(self, request, pk = None):
+        """
+        Method to update the object by `pk`.
+        Args:
+            request:
+            pk:
+
+        Returns:
+
+        """
+        response_dict = {
+                "Message": "This maps to HTTP GET request"
+        }
+        return Response(response_dict, HTTP_200_OK)
+
+    def destroy(self, request, pk = None):
+        """
+        Method to update the object by `pk`.
+        Args:
+            request:
+            pk:
+
+        Returns:
+
+        """
+        response_dict = {
+                "Message": "This maps to HTTP delete request"
+        }
+        return Response(response_dict, HTTP_200_OK)
+
+    def partial_update(self, request, pk = None):
+        """
+        Method to update the object by `pk`.
+        Args:
+            request:
+            pk:
+
+        Returns:
+
+        """
+        response_dict = {
+                "Message": "This maps to HTTP patch request"
+        }
+        return Response(response_dict, HTTP_200_OK)
+
+
+class HelloApiView(APIView):
+    """
+    Class to test django api views.
+    Need to support all methods get, put, post, patch, delete.
+    """
+    serializer_class = HelloSerailzer
+
+    def get(self, request, format = None):
+        """
+        Method to test the get request call.
+        Args:
+            request:
+            format:
+
+        Returns:
+
+        """
+        message = ["This is test message", "call to api"]
+        response_dict = {
+                "message": message, "test": "Hello world"
+        }
+        return Response(response_dict, status = HTTP_200_OK)
+
+    def post(self, request):
+        """
+        Method to serve the post request made to the apiview.
+        Args:
+            request:
+
+        Returns:
+
+        """
+        szs = self.serializer_class(data = request.data)
+        if szs.is_valid():
+            name = szs.validated_data.get("name", "No Name Found")
+            response_dict = {
+                    "name posted": 'Hey Hi {}'.format(name)
+            }
+            return Response(response_dict, status = HTTP_200_OK)
+        else:
+            return Response(szs.errors, status = HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk = None):
+        """
+        Method to handle put request.
+        Args:
+            request:
+            pk:
+
+        Returns:
+
+        """
+        response_dict = {
+                "message": "Details: ".format(self.__doc__)
+        }
+        return Response(response_dict, status = HTTP_200_OK)
+
+    def patch(self, request, pk = None):
+        """
+        This method will update some details to object rather than the whole
+        object
+        .
+        Args:
+            request:
+            pk:
+
+        Returns:
+
+        """
+        response_dict = {
+                "message": "Details: ".format(self.__doc__)
+        }
+        return Response(response_dict, status = HTTP_200_OK)
+
+    def delete(self, request, pk = None):
+        """
+        Method to delete the object based on a primary key `pk`.
+        Args:
+            request:
+            pk:
+
+        Returns:
+
+        """
+        response_dict = {
+                "message": "Details: ".format(self.__doc__)
+        }
+        return Response(response_dict, status = HTTP_200_OK)
+
+
+class UserProfileViewSet(ModelViewSet):
+    """
+    Class to handle user profiles.
+    """
+    serializer_class = UserProfilerSerializer
+    queryset = UserProfile.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (UserProfilePermission,)
+    filter_backends = (SearchFilter,)
+    search_fields = ("name", "email")
+
+
+class UserLoginApiView(ObtainAuthToken):
+    """
+    Api view to handle user authentication token request.
+    """
+    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+
+
+class UserFeedViewSet(ModelViewSet):
+    """
+    View set to handle the user feed items.
+    """
+    serializer_class = UserFeedSerializer
+    authentication_classes = (TokenAuthentication,)
+    queryset = UserFeedItem.objects.all()
+    # feature
+    # to make feed public and available to all users
+    # permission_classes = (IsAuthenticatedOrReadOnly, UserFeedPermission)
+
+    # feature
+    # to make feed private and available to authenticated user only.
+    permission_classes = (IsAuthenticated, UserFeedPermission)
+
+
+def perform_create(self, serializer):
+    """
+    Handle the create operation of user feed item.
+    Args:
+        serializer:
+
+    Returns:
+
+    """
+    serializer.save(user_profile = self.request.user)

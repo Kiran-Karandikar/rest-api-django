@@ -1,20 +1,21 @@
-# Table of contents
-* [Vagrant Setup](#system-dependencies)
-    * [Usage](#usage)
-* [Vagrant Issues](#vagrant-issues)
-* [Django Environment Issues](#environment-issues)
-* [Postgres Issues](#postgres-issues)
-
-# Backend Rest api with django, postgres, vagrant
+# Backend Rest api with django & postgres 
 Repo for Udemy course "Build Backend Rest Api with Django and Python"
 
-## Project Cheat Sheet
-- [ ] Add Link to resource Page here
+# Table of contents
+> Environment related issues
+* [Vagrant Setup](#system-dependencies)
+  * [Usage](#usage)
+  * [Possible Issues](#vagrant-issues)
+* [Django Issues](#environment-issues)
+* [Postgres Issues](#postgres-issues)
+
+## Project Cheat Sheet 
+![All commands](Resources/command_line_cheat_sheet.pdf)
 
 ## Django Resource Links
 * [How to override user model in django](https://docs.djangoproject.com/en/2.2/topics/auth/customizing/#auth-custom-user)
 
-* [Linux Commmand Guid](http://www.keyxl.com/aaaf192/83/Linux-Bash-Shell-keyboard-shortcuts.htm)
+* [Linux Command Guid](http://www.keyxl.com/aaaf192/83/Linux-Bash-Shell-keyboard-shortcuts.htm)
 
 * [How to use plural name for django class](https://docs.djangoproject.com/en/2.2/ref/models/options/#verbose-name)
 
@@ -28,11 +29,12 @@ Repo for Udemy course "Build Backend Rest Api with Django and Python"
     * `vagrant plugin install vagrant-librarian-chef-nochef`
     * `vagrant plugin uninstall vagrant-vbguest`
     * `vagrant plugin install vagrant-vbguest --plugin-version 0.21`
-* Windows only: [Git](https://git-scm.com/download/win), for using `vagrant ssh` on Windows easily
+* Windows only:
+  * [Git](https://git-scm.com/download/win), for using `vagrant ssh` on Windows easily
 
 > * Make Sure you change the git to run as administrator,
-to do this go to git installation and right click on git.exe, bash.exe and under compatibility click on run as administrator
-> * Do same for git-bash.exe and git-cmd.exe
+git installation and right click on git.exe, bash.exe under compatibility select  on run as administrator
+> * Repeat for git-bash.exe and git-cmd.exe
 ### Usage
 #### First Run
 
@@ -42,11 +44,11 @@ to do this go to git installation and right click on git.exe, bash.exe and under
 #### Subsequent Runs
 1. `vagrant up`
 2. `vagrant ssh`
-##### Destory VM
+##### Destroy VM
 ``vagrant destroy --force``
 ### *Vagrant Issues*
 #### Default Superuser Password : ``vagrant``
-#### Not aware of root password
+#### Forgotten root password
 ```shell script
 sudo passwd root
 ```
@@ -54,7 +56,6 @@ sudo passwd root
 * create ssh key using ``ssh-keygen`` inside of your host machine
 
 #### _Any PIP related issues_
- 
 ```shell script
 sudo apt-get remove --purge python-pip
 sudo apt-get remove --purge python3-pip
@@ -65,18 +66,16 @@ curl  https://bootstrap.pypa.io/pip/3.5/get-pip.py -o get-pip.py
 python3 get-pip.py
 sudo pip3 install virtualenv
 ```
-> !!! Crate Virtual Environment outside of  /vagrant/ shared folder...
+> !!! Crate Virtual Environment outside  /vagrant/ shared folder...
 If you go to the home folder of your vagrant user, you can create the virtualenv in there without this problem!
->
->
-> Just the venv must be out of this /vagrant/ directory... after that you can go work as usually activating this venv and working with your sorce code in the usual /vagrat/ shared dir...
->
+
+> Just the venv must be out of this /vagrant/ directory... after that you can go work as usually activating this venv and working with your source code in the usual /vagrat/ shared dir...
 ```shell script
 cd ~
 mkdir virutal_envs
 virtualenv virutal_envs/project_name_venv  
 ```
-### Django Environment Issues
+### Django  Issues
 * On first run, install following packages
 ```shell script
 pip install --user pipenv
@@ -94,7 +93,7 @@ that means everything is correct from django side and guest vm side
 python manage.py runserver [::]:8080
 ```
 ### Postgres Issues
-> #### Not able to create a database or anything
+> #### Not able to create a database or similar issue
 ```postgresql
 /* List all tables in database*/
 \l 
@@ -127,7 +126,7 @@ host    all             all             0.0.0.0/0               md5
 # At last 
 sudo service postgresql restart
 ```
-> #### settings for pgadmin4
+> ### General settings for pgadmin4
 ##### Pgadmin4 General
 ![Pgadmin4 General](Resources/pgadmin4-connection-1.png)
 ##### Pgadmin4 Connection

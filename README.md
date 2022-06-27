@@ -55,6 +55,7 @@
 </div>
 
 <!-- BADGES.MD Finish -->
+<!-- BADGES.MD Finish -->
 # Backend Rest api with django & postgres 
 Repo for Udemy course "Build Backend Rest Api with Django and Python"
 
@@ -190,6 +191,7 @@ sudo service postgresql restart
 ![Pgadmin4 Connection](Resources/pgadmin4-connection-2.png)
 ##### Pgadmin4 SSH Tunnel
 ![Pgadmin4 SSH Tunnel](Resources/pgadmin4-connection-3.png)
+
 
 ### Other projects
 
